@@ -4,7 +4,9 @@ import threading
 import os
 
 # 總覽頁面網址
-portalUrl = 'https://www.nintendo.co.jp/wallpaper/22_HBD_A/index.html'
+# 22_HBD_A, 21_HBD_A
+WALLPAPAER_PATH = '21_HBD_A'
+portalUrl = f'https://www.nintendo.co.jp/wallpaper/{WALLPAPAER_PATH}/index.html'
 response = requests.get(portalUrl)
 soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -13,7 +15,7 @@ categoryPages = []
 # 取得每個分類頁面網址
 for link in soup.find_all('a', attrs={'href': lambda x: x and 'HBD' in x and '..' in x}):
     item_href = link.get('href').lstrip('../')
-    baseUrl = portalUrl.rstrip('22_HBD_A/indext.html')
+    baseUrl = portalUrl.rstrip(f'{WALLPAPAER_PATH}/indext.html')
     pageUrl = baseUrl + '/' + item_href
     categoryPages.append(pageUrl)
 
