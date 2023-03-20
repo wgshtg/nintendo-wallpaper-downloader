@@ -34,7 +34,7 @@ WALLPAPER_FOLDER = 'images'
 # 抓出所有主題頁面
 for link in soup.find_all('a', attrs={'href': lambda x: x and 'HBD' in x}):
     # /22_HBD_Mario/index.html
-    topicHref = link.get('href').lstrip('..')
+    topicHref = link.get('href').replace('..', '')
     # https://www.nintendo.co.jp/wallpaper/22_HBD_Mario/index.html
     topicLink = baseUrl + topicHref
     topicLinks.append(topicLink)
@@ -44,11 +44,11 @@ for topicLink in topicLinks:
     response = requests.get(topicLink)
     soup = BeautifulSoup(response.text, 'html.parser')
     # https://www.nintendo.co.jp/wallpaper/22_HBD_Mario
-    baseUrl = topicLink.rstrip('/index.html')
+    baseUrl = topicLink.replace('/index.html', '')
     for link in soup.find_all('a', attrs={'href': lambda x: x and 'HBD' in x and not '..' in x}):
         # img/22_HBD_Zelda_1080_1920.jpg
         imgHref = link.get('href')
-        imgName = imgHref.lstrip('img/')
+        imgName = imgHref.replace('img/', '')
         # https://www.nintendo.co.jp/wallpaper/22_HBD_Mario/img/22_HBD_Mario_1242_2688.jpg
         imgLink = baseUrl + '/' + imgHref
         wallpaperLinks.append(imgLink)
