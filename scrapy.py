@@ -13,8 +13,10 @@ select = input("輸入選項編號")
 WALLPAPER_YEAR_PATH = ''
 if select == "1":
     WALLPAPER_YEAR_PATH = '22_HBD_A'
+    print("開始下載 2022 年度壁紙...")
 elif select == "2":
     WALLPAPER_YEAR_PATH = '23_HBD_A'
+    print("開始下載 2023 年度壁紙...")
 else:
     print(f"{select} 不是有效選項編號，請輸入有效選項編號！")
     sys.exit()
